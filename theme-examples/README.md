@@ -9,7 +9,7 @@ This folder is Anthropic's `theme-examples` 0.4.3 (Apache-2.0, see LICENSE) with
 
 - **A default wallpaper.** A session shows Pavilion and Stones (a Suzhou garden: a white wall with a round gate and a Taihu
   stone at the left, a pavilion on a rockery by the water at the right) where neither it nor its project has chosen a theme:
-  natural daylight colours in a light window, a warm black, moonlit night with the gate and the pavilion lit in a dark one.
+  natural daylight colours in a light window, a moonlit night on the app's own dark grey, with the gate and the pavilion lit, in a dark one.
   Lattice Windows, the default before 0.5.0, is still there as a theme.
   `/custom-theme off` turns the default off everywhere, `/custom-theme default` turns it on again.
 - **It follows the system's appearance (macOS only).** `tools/appearance-watch` (an arm64 binary; its Swift source is

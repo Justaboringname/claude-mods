@@ -223,11 +223,11 @@ const STOCKS: { day: Stock; night: Stock } = {
     },
     bamboo: { leaf: '#4f7358', cane: '#3f5a48' },
   },
-  /** The moon-glow night (model nightMoonGlow): a warm black ground, one small pale yellow glow round the moon, moon-white plaster,
+  /** The moon-glow night (model nightMoonGlow): the app's own dark grey as the ground (#181818; the person found the warm black too yellow), one small pale yellow glow round the moon, moon-white plaster,
    * tiles near black, pale warm lines; the pavilion lit amber from within, its light on the floor, the eaves' undersides, the rails,
    * the sill walls, the rockery's near side and broken on the water; the courtyard beyond the gate softly lit. Nothing purple. */
   night: {
-    sky: { base: [[0, '#1b1915'], [1, '#141210']], glows: [{ x: 1440, y: 196, r: 236, colour: '#eadf9f', alpha: 0.3 }] },
+    sky: { base: [[0, '#181818'], [1, '#181818']], glows: [{ x: 1440, y: 196, r: 236, colour: '#eadf9f', alpha: 0.3 }] },
     dark: true, ink: '#ece7d8', disc: '#f8f1cf', seal: '#a64a3c', shade: '#0e0c0a', shadeAlpha: 0.9, wash: 0.5, line: 0.8,
     halo: 0.3, haloColour: '#efe2a8', haloR: 104, discAlpha: 1,
     paint: {
@@ -237,7 +237,7 @@ const STOCKS: { day: Stock; night: Stock } = {
       wood: '#1c1915', woodFar: '#c8925e', woodFarAlpha: 0.55, rail: '#f6d7a0',
       stone: '#3a3731', stoneLit: '#d8d4c8', stoneLitAlpha: 0.26, stoneWash: '#0e0c0a', stoneWashAlpha: 0.7, hollow: '#0a0908', hollowAlpha: 0.9, stoneLine: '#ece7d8',
       bough: '#a39d88', boughAlpha: 0.7, willowNear: '#9c977f', willowFar: '#6b675a', willowAlpha: 0.8, grass: '#c9c3b0',
-      water: '#141210', waterAlpha: 0, ripple: '#c9c3b0',
+      water: '#181818', waterAlpha: 0, ripple: '#c9c3b0',
       lamp: {
         stops: [[0, '#fae2b0', 1], [0.3, '#f2c27a', 0.86], [0.62, '#de9c58', 0.38], [1, '#c4844e', 0]],
         spill: '#eea87e',

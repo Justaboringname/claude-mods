@@ -316,7 +316,7 @@ export const STOCKS = {
    * moon-white. The person did not like the wine-purple ground of the first lantern night and asked for the ground, not the walls,
    * to take the pale yellow of moonlight; on a dark window that can only be a glow, so this is the one they chose of four. */
   nightMoonGlow: {
-    sky: { base: [[0, '#1b1915'], [1, '#141210']], glows: [{ x: 1452, y: 160, r: 330, colour: '#eadf9f', alpha: 0.3 }] },
+    sky: { base: [[0, '#181818'], [1, '#181818']], glows: [{ x: 1452, y: 160, r: 330, colour: '#eadf9f', alpha: 0.3 }] },
     ink: '#ece7d8', disc: '#f8f1cf', seal: '#a64a3c', lime: '#e3dfd2', limeAlpha: 1, bar: 1,
     shade: '#0e0c0a', shadeAlpha: 0.5, brickAlpha: 0.78, shadowInk: '#0d0b09', shadowAlpha: 0.4, hole: 1,
     tileInk: '#0c0a09', tile: 1.4, ridge: 1.4, rows: 0.62, rib: 0.3, groove: 0.3, line: 0.8, wallMist: 0,

@@ -99,13 +99,14 @@ const INK_THEMES: Theme[] = [
 
 /** LOCAL CHANGE: a Suzhou garden wall with lattice windows, a scene of our own. The person found the first dusk skies too
  * vivid for a garden and the near-colourless ink sheets too grey; the default pair is what they then chose: natural daylight
- * colours by day (garden-lattice-natural.ts) and lantern-lit windows on a warm black, moonlit night (garden-lattice-lantern.ts), both
+ * colours by day (garden-lattice-natural.ts) and lantern-lit windows on a moonlit night (garden-lattice-lantern.ts; its ground was a warm black until 0.6.1, when the
+ * person found that too yellow and asked for the app's own dark grey, #181818), both
  * with opaque white plaster and dark tiles. The older sheets stay as extra themes. */
 const GARDEN_THEMES: Theme[] = [
   {
     // LOCAL CHANGE, the default by day since 0.5.0. The person found the three walls of Lattice Windows too alike and asked
     // for one sheet that brings the motifs together: a wall with a round gate and a Taihu stone at the left, a pavilion at
-    // the right, the sun or moon above. Same colours as the lattice pair they chose (natural daylight, warm black night).
+    // the right, the sun or moon above. Same colours as the lattice pair they chose (natural daylight; the night ground is the app's own dark grey since 0.6.1).
     // Glass opacity 0 for the reason given at 'garden-lattice' below.
     id: 'garden-court',
     title: 'Pavilion and Stones',
@@ -119,10 +120,10 @@ const GARDEN_THEMES: Theme[] = [
     // The default by night since 0.5.0.
     id: 'garden-court-night',
     title: 'Pavilion and Stones, Moonlit Night',
-    blurb: 'The same garden on a warm black night: a pale yellow glow round the moon, the gate lit amber from the court behind, a lantern in the pavilion, the stones in moonlit grey.',
+    blurb: 'The same garden at night, on the app\'s own dark grey: a pale yellow glow round the moon, the gate lit amber from the court behind, a lantern in the pavilion, the stones in moonlit grey.',
     window: 'dark',
     twin: 'garden-court',
-    glass: { blur: 0, tint: '#181613', opacity: 0 },
+    glass: { blur: 0, tint: '#181818', opacity: 0 },
     scene: () => gardenCourtNightSvg(),
   },
   {
@@ -141,10 +142,10 @@ const GARDEN_THEMES: Theme[] = [
     // The default by night until 0.5.0: the garden open after dark, its lattice windows lit from inside (the person chose this one for dark mode).
     id: 'garden-lattice-night',
     title: 'Lattice Windows, Lantern Night',
-    blurb: 'The same wall on a warm black night, a pale yellow glow round the moon, its three lattice windows lit amber from inside.',
+    blurb: 'The same wall at night, on the app\'s own dark grey, a pale yellow glow round the moon, its three lattice windows lit amber from inside.',
     window: 'dark',
     twin: 'garden-lattice',
-    glass: { blur: 0, tint: '#181613', opacity: 0 },
+    glass: { blur: 0, tint: '#181818', opacity: 0 },
     scene: () => gardenLatticeLanternNightSvg(),
   },
   {
