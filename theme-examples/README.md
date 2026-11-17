@@ -8,7 +8,7 @@ This folder is Anthropic's `theme-examples` 0.4.3 (Apache-2.0, see LICENSE) with
 `LOCAL CHANGE` where it stands in `hooks/register.tsx`, `hooks/themes.ts` and `hooks/scenes/`:
 
 - **A default wallpaper.** A session shows Lattice Windows (a Suzhou garden wall) where neither it nor its project has
-  chosen a theme: natural daylight colours in a light window, lantern-lit windows on a wine-dark night in a dark one.
+  chosen a theme: natural daylight colours in a light window, lantern-lit windows on a warm black, moonlit night in a dark one.
   `/custom-theme off` turns the default off everywhere, `/custom-theme default` turns it on again.
 - **It follows the system's appearance (macOS only).** `tools/appearance-watch` (an arm64 binary; its Swift source is
   beside it) rewrites `~/Library/Caches/claude-mods/appearance-state` the moment macOS announces a change; one instance

@@ -98,7 +98,7 @@ const INK_THEMES: Theme[] = [
 
 /** LOCAL CHANGE: a Suzhou garden wall with lattice windows, a scene of our own. The person found the first dusk skies too
  * vivid for a garden and the near-colourless ink sheets too grey; the default pair is what they then chose: natural daylight
- * colours by day (garden-lattice-natural.ts) and lantern-lit windows on a wine-dark night (garden-lattice-lantern.ts), both
+ * colours by day (garden-lattice-natural.ts) and lantern-lit windows on a warm black, moonlit night (garden-lattice-lantern.ts), both
  * with opaque white plaster and dark tiles. The older sheets stay as extra themes. */
 const GARDEN_THEMES: Theme[] = [
   {
@@ -117,10 +117,10 @@ const GARDEN_THEMES: Theme[] = [
     // The default by night: the garden open after dark, its lattice windows lit from inside (the person chose this one for dark mode).
     id: 'garden-lattice-night',
     title: 'Lattice Windows, Lantern Night',
-    blurb: 'The same wall on a wine-dark night, pale yellow in the moonlight, its three lattice windows lit amber from inside.',
+    blurb: 'The same wall on a warm black night, a pale yellow glow round the moon, its three lattice windows lit amber from inside.',
     window: 'dark',
     twin: 'garden-lattice',
-    glass: { blur: 0, tint: '#1f141a', opacity: 0 },
+    glass: { blur: 0, tint: '#181613', opacity: 0 },
     scene: () => gardenLatticeLanternNightSvg(),
   },
   {
