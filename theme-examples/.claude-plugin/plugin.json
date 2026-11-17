@@ -1,6 +1,6 @@
 {
   "name": "theme-examples",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Local build of Anthropic's theme-examples 0.4.3: backdrops behind the chat in the Claude desktop app, with a default wallpaper (a Suzhou garden wall with lattice windows) that follows the system's light or dark appearance. /custom-theme list names the themes.",
   "author": {
     "name": "Anthropic, with local changes by Justaboringname"

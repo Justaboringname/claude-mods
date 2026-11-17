@@ -293,6 +293,25 @@ export const STOCKS = {
       spillStops: [[0, 0.85], [0.42, 0.6], [0.7, 0.24], [1, 0]],
     },
   },
+  /** Night, moonlit lantern: the lantern night with its plaster in pale moonlight yellow instead of dusky rose (the person did not like
+   * the purple of the walls and asked for something lighter, "pale yellow, like moonlight"). The air stays a deep wine-ink. */
+  nightMoonlit: {
+    sky: { base: [[0, '#23171e'], [1, '#1c1218']], glows: [] },
+    ink: '#ebe2c8', disc: '#f7f0cf', seal: '#a64a3c', lime: '#e4dbbd', limeAlpha: 1, bar: 1,
+    shade: '#1c0c18', shadeAlpha: 0.5, brickAlpha: 0.78, shadowInk: '#1a0c13', shadowAlpha: 0.4, hole: 1,
+    tileInk: '#130a0f', tile: 1.4, ridge: 1.4, rows: 0.62, rib: 0.3, groove: 0.3, line: 0.8, wallMist: 0,
+    petal: '#f6f0e2', petalAlpha: 0.9, petalLine: '#2a161d', petalLineAlpha: 0.6, halo: 0.2,
+    plaster: '#dcd4b1', plasterMist: { a: [580, 622], b: [852, 898], c: [872, 918] }, slopeLight: 0,
+    edgeInk: '#130a0f', edge: 0.7, fadeStops: [[0, 0], [1, 1]], cornerMist: 40,
+    mistStops: [[0, 0.55], [0.35, 0.45], [1, 0]], deepFlat: true, discAlpha: 1, haloColour: '#ddd3a6', haloR: 80,
+    bambooRamp: { from: 250, to: 446, stops: [[0, '#8a8468'], [0.68, '#b9b08c'], [1, '#231a17']] }, bambooInk: 1.1,
+    barFill: '#3a2026', barEdge: '#12090d', wood: '#e0d6b8', woodFan: '#2a141b',
+    lamp: {
+      stops: [[0, '#fae2b0'], [0.35, '#f2c27a'], [0.75, '#de9c58'], [1, '#c4844e']],
+      spill: '#eea87e',
+      spillStops: [[0, 0.85], [0.42, 0.6], [0.7, 0.24], [1, 0]],
+    },
+  },
 } as const satisfies Record<string, Stock>
 
 interface Point {
@@ -1308,9 +1327,9 @@ ${drawing}
 }
 
 /** Lattice Windows on any of its stocks: the two ink sheets (the gardens' own, low in colour), or the dusk skies shared with Ink Mountains. */
-export function sceneSvg(stock: 'dayLantern' | 'nightLantern' | 'dayDusk' | 'nightDusk' | 'dayInk' | 'nightInk' | 'day' | 'night' | 'nightWine'): string {
+export function sceneSvg(stock: 'dayLantern' | 'nightLantern' | 'nightMoonlit' | 'dayDusk' | 'nightDusk' | 'dayInk' | 'nightInk' | 'day' | 'night' | 'nightWine'): string {
   const chosen =
-    stock === 'dayLantern' ? STOCKS.dayLantern : stock === 'nightLantern' ? STOCKS.nightLantern :
+    stock === 'dayLantern' ? STOCKS.dayLantern : stock === 'nightLantern' ? STOCKS.nightLantern : stock === 'nightMoonlit' ? STOCKS.nightMoonlit :
     stock === 'dayDusk' ? STOCKS.dayDusk : stock === 'nightDusk' ? STOCKS.nightDusk :
     stock === 'dayInk' ? STOCKS.dayInk : stock === 'nightInk' ? STOCKS.nightInk : stock === 'day' ? STOCKS.day : stock === 'night' ? STOCKS.nightBlue : STOCKS.night
   return latticeSheet(chosen)
@@ -1323,5 +1342,5 @@ export function daySvg(): string {
 
 /** Lattice Windows on a garden night (灯影夜游), for a dark window: wine-ink air, the three openings lit amber-gold from within. */
 export function nightSvg(): string {
-  return sceneSvg('nightLantern')
+  return sceneSvg('nightMoonlit')
 }

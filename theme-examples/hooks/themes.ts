@@ -117,7 +117,7 @@ const GARDEN_THEMES: Theme[] = [
     // The default by night: the garden open after dark, its lattice windows lit from inside (the person chose this one for dark mode).
     id: 'garden-lattice-night',
     title: 'Lattice Windows, Lantern Night',
-    blurb: 'The same wall on a wine-dark night, its three lattice windows lit amber from inside.',
+    blurb: 'The same wall on a wine-dark night, pale yellow in the moonlight, its three lattice windows lit amber from inside.',
     window: 'dark',
     twin: 'garden-lattice',
     glass: { blur: 0, tint: '#1f141a', opacity: 0 },
