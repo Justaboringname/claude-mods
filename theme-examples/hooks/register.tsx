@@ -26,9 +26,9 @@ const COMMAND = 'custom-theme'
 //    the window's kind;
 // 3. "/custom-theme off" (or No theme on the card) also turns the default off everywhere, and
 //    "/custom-theme default" turns it on again;
-// 4. scenes of our own (Ink Mountains) and warm night stocks of Plotter Tide, in themes.ts;
+// 4. scenes of our own (Pavilion and Stones, Lattice Windows, Ink Mountains) and warm night stocks of Plotter Tide, in themes.ts;
 // 5. fireworks on the word "merged" are off unless asked for with "/fireworks auto on".
-const DEFAULT_PAIR = { light: 'garden-lattice', dark: 'garden-lattice-night' } as const
+const DEFAULT_PAIR = { light: 'garden-court', dark: 'garden-court-night' } as const
 // Holds 'off' where the person cleared the project's theme: absent, the default shows. One key for every project.
 const DEFAULT_OFF_KEY = 'local:default-off'
 // The window's kind is learnt from one small program (tools/appearance-watch): the moment macOS announces an

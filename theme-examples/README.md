@@ -1,19 +1,22 @@
 # Theme examples (local build)
 
-_Last updated: 2026-11-16_
+_Last updated: 2026-11-17_
 
 Install: `/plugin install theme-examples --marketplace Justaboringname/claude-mods`
 
 This folder is Anthropic's `theme-examples` 0.4.3 (Apache-2.0, see LICENSE) with local changes. Each is marked
 `LOCAL CHANGE` where it stands in `hooks/register.tsx`, `hooks/themes.ts` and `hooks/scenes/`:
 
-- **A default wallpaper.** A session shows Lattice Windows (a Suzhou garden wall) where neither it nor its project has
-  chosen a theme: natural daylight colours in a light window, lantern-lit windows on a warm black, moonlit night in a dark one.
+- **A default wallpaper.** A session shows Pavilion and Stones (a Suzhou garden: a white wall with a round gate and a Taihu
+  stone at the left, a pavilion on a rockery by the water at the right) where neither it nor its project has chosen a theme:
+  natural daylight colours in a light window, a warm black, moonlit night with the gate and the pavilion lit in a dark one.
+  Lattice Windows, the default before 0.5.0, is still there as a theme.
   `/custom-theme off` turns the default off everywhere, `/custom-theme default` turns it on again.
 - **It follows the system's appearance (macOS only).** `tools/appearance-watch` (an arm64 binary; its Swift source is
   beside it) rewrites `~/Library/Caches/claude-mods/appearance-state` the moment macOS announces a change; one instance
   serves every session, and each session looks at that file's stamp four times a second. A theme with a twin goes over to it.
-- **Scenes of our own.** `hooks/scenes/garden-lattice*.ts` (the garden wall, in several palettes), `hooks/scenes/ink-mountains.ts`
+- **Scenes of our own.** `hooks/scenes/garden-court.ts` (the gate, the stones and the pavilion), `hooks/scenes/garden-lattice*.ts`
+  (the garden wall with lattice windows, in several palettes), `hooks/scenes/ink-mountains.ts`
   (four dusk skies) and six warm night stocks of Plotter Tide.
 - **No reading veil on our own scenes.** Their glass opacity is 0: the app ramps the glass tint in beside the chat column,
   and on a dark ground that ramp shows as vertical stripes. These scenes keep the column clear instead.

@@ -1,9 +1,16 @@
 # claude-mods
 
-给 Claude 桌面 app 换对话背景的 mod：一面苏州园林的粉墙黛瓦，跟随系统深浅自动切换。
-A wallpaper mod for the Claude desktop app: a Suzhou garden wall that follows the system's light or dark appearance.
+给 Claude 桌面 app 换对话背景的 mod：一座苏州园林（粉墙月洞门、太湖石、水边的亭子），跟随系统深浅自动切换。
+A wallpaper mod for the Claude desktop app: a Suzhou garden (a white wall with a round gate, a Taihu stone, a pavilion by the
+water) that follows the system's light or dark appearance.
 
-| 浅色 · 晴日写真 | 深色 · 灯影夜游 |
+| 浅色 · 亭台山石 | 深色 · 月夜 |
+| --- | --- |
+| ![Pavilion and Stones by day](docs/court-day.jpg) | ![Pavilion and Stones at night](docs/court-night.jpg) |
+
+之前的默认壁纸「花窗」还在，`/custom-theme` 里可以选。Lattice Windows, the default before 0.5.0, is still a theme:
+
+| 花窗 · 晴日写真 | 花窗 · 灯影夜游 |
 | --- | --- |
 | ![Lattice Windows by day](docs/lattice-day.jpg) | ![Lattice Windows at night](docs/lattice-night.jpg) |
 
@@ -13,9 +20,9 @@ A wallpaper mod for the Claude desktop app: a Suzhou garden wall that follows th
 /plugin install theme-examples --marketplace Justaboringname/claude-mods
 ```
 
-装好后每个会话默认显示「花窗」。`/custom-theme` 出卡片可以换别的主题，`/custom-theme off` 关掉默认壁纸，`/custom-theme default` 再打开。
+装好后每个会话默认显示「亭台山石」。`/custom-theme` 出卡片可以换别的主题，`/custom-theme off` 关掉默认壁纸，`/custom-theme default` 再打开。
 
-After installing, every session shows Lattice Windows by default. `/custom-theme` lists the other themes, `/custom-theme off`
+After installing, every session shows Pavilion and Stones by default. `/custom-theme` lists the other themes, `/custom-theme off`
 turns the default off, `/custom-theme default` turns it on again.
 
 ## 里面有什么 / What is here

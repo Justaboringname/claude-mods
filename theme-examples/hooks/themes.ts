@@ -18,6 +18,7 @@ import { inkMountainsSvg } from './scenes/ink-mountains'
 import { sceneSvg as gardenLatticeSvg } from './scenes/garden-lattice'
 import { daySvg as gardenLatticeNaturalDaySvg, nightSvg as gardenLatticeNaturalNightSvg } from './scenes/garden-lattice-natural'
 import { daySvg as gardenLatticeLanternDaySvg, nightSvg as gardenLatticeLanternNightSvg } from './scenes/garden-lattice-lantern'
+import { daySvg as gardenCourtDaySvg, nightSvg as gardenCourtNightSvg } from './scenes/garden-court'
 
 /** One theme: what the card and the list say, the glass over it, and its scene: a function that builds one SVG whose
  *  own CSS animates it. A scene says whether it is dark or light with its tint, picked from it. */
@@ -102,7 +103,30 @@ const INK_THEMES: Theme[] = [
  * with opaque white plaster and dark tiles. The older sheets stay as extra themes. */
 const GARDEN_THEMES: Theme[] = [
   {
-    // The default by day: the natural colours of a photograph (the person chose this one for light mode).
+    // LOCAL CHANGE, the default by day since 0.5.0. The person found the three walls of Lattice Windows too alike and asked
+    // for one sheet that brings the motifs together: a wall with a round gate and a Taihu stone at the left, a pavilion at
+    // the right, the sun or moon above. Same colours as the lattice pair they chose (natural daylight, warm black night).
+    // Glass opacity 0 for the reason given at 'garden-lattice' below.
+    id: 'garden-court',
+    title: 'Pavilion and Stones',
+    blurb: 'A Suzhou garden in soft daylight: a white wall with a round gate, a Taihu stone and a banana plant at its end, a pavilion on a rockery by the water, a willow bough over the sun.',
+    window: 'light',
+    twin: 'garden-court-night',
+    glass: { blur: 0, tint: '#d4dce7', opacity: 0 },
+    scene: () => gardenCourtDaySvg(),
+  },
+  {
+    // The default by night since 0.5.0.
+    id: 'garden-court-night',
+    title: 'Pavilion and Stones, Moonlit Night',
+    blurb: 'The same garden on a warm black night: a pale yellow glow round the moon, the gate lit amber from the court behind, a lantern in the pavilion, the stones in moonlit grey.',
+    window: 'dark',
+    twin: 'garden-court',
+    glass: { blur: 0, tint: '#181613', opacity: 0 },
+    scene: () => gardenCourtNightSvg(),
+  },
+  {
+    // The default until 0.5.0: the natural colours of a photograph (the person chose this one for light mode).
     // Glass opacity 0: the app's reading veil (the glass tint ramped in beside the chat column) shows as vertical stripes,
     // and this scene keeps the column clear, so it needs no veil.
     id: 'garden-lattice',
@@ -114,7 +138,7 @@ const GARDEN_THEMES: Theme[] = [
     scene: () => gardenLatticeNaturalDaySvg(),
   },
   {
-    // The default by night: the garden open after dark, its lattice windows lit from inside (the person chose this one for dark mode).
+    // The default by night until 0.5.0: the garden open after dark, its lattice windows lit from inside (the person chose this one for dark mode).
     id: 'garden-lattice-night',
     title: 'Lattice Windows, Lantern Night',
     blurb: 'The same wall on a warm black night, a pale yellow glow round the moon, its three lattice windows lit amber from inside.',
