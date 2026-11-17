@@ -25,6 +25,18 @@ water) that follows the system's light or dark appearance.
 After installing, every session shows Pavilion and Stones by default. `/custom-theme` lists the other themes, `/custom-theme off`
 turns the default off, `/custom-theme default` turns it on again.
 
+## 自己做一张 / Make your own
+
+装好后，在任意会话里跟 Claude 说「帮我做一张 ××× 的壁纸」（或者敲 `/theme-examples:make-wallpaper`）。Claude 会按插件自带的
+skill 画出浅色、深色两版 SVG，检查后放进 `~/.claude/wallpapers/<名字>/`，你再敲 `/custom-theme <名字>` 就换上了，
+并且同样跟随系统深浅。不用写插件，也不用重装。壁纸就是那个文件夹，打包发给别人，对方解压到自己的
+`~/.claude/wallpapers/` 即可。
+
+With the plugin installed, ask Claude in any session for "a wallpaper of ..." (or type `/theme-examples:make-wallpaper`).
+Claude follows the skill that ships with the plugin: it draws a light and a dark SVG scene, checks them, and saves them to
+`~/.claude/wallpapers/<name>/`; `/custom-theme <name>` then applies it, following the system's appearance like the built-in
+pairs. No plugin to write, nothing to reinstall. A wallpaper is its folder: zip it to share it.
+
 ## 里面有什么 / What is here
 
 - `theme-examples/`：mod 本体。它是 Anthropic 官方 `theme-examples` 0.4.3 的改版（Apache-2.0），改动见该目录的 README。

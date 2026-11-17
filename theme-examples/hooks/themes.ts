@@ -212,7 +212,7 @@ const GARDEN_THEMES: Theme[] = [
   },
 ]
 
-export const THEMES: readonly Theme[] = [
+const BUILT_IN: readonly Theme[] = [
   ...GARDEN_THEMES,
   ...INK_THEMES,
   ...WARM_NIGHT_THEMES,
@@ -387,7 +387,25 @@ export const THEMES: readonly Theme[] = [
   },
 ]
 
+/**
+ * LOCAL CHANGE: the built-in themes, then the person's own wallpapers (custom.ts), which are read from disk after the
+ * module loads. ONE ARRAY, CHANGED IN PLACE: everything that reads THEMES reads it anew each time, so it sees them.
+ */
+const ALL: Theme[] = [...BUILT_IN]
+export const THEMES: readonly Theme[] = ALL
+/** The ids of the built-in themes: a wallpaper of the person's own may not take one. */
+export const BUILT_IN_IDS: ReadonlySet<string> = new Set(BUILT_IN.map(theme => theme.id))
+
 const built = new Map<string, string>()
+
+/** LOCAL CHANGE: puts the person's own wallpapers behind the built-in themes, in place of the ones put there before. */
+export function setCustomThemes(themes: readonly Theme[]): void {
+  for (const gone of ALL.splice(BUILT_IN.length)) {
+    built.delete(gone.id)
+  }
+
+  ALL.push(...themes)
+}
 
 /** A theme's SVG, built the first time it is asked for: a session pays only for the scenes it shows. */
 export function sceneOf(theme: Theme): string {

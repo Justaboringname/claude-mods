@@ -21,6 +21,11 @@ This folder is Anthropic's `theme-examples` 0.4.3 (Apache-2.0, see LICENSE) with
 - **No reading veil on our own scenes.** Their glass opacity is 0: the app ramps the glass tint in beside the chat column,
   and on a dark ground that ramp shows as vertical stripes. These scenes keep the column clear instead.
 - **Fireworks on the word "merged" are off** unless asked for with `/fireworks auto on`.
+- **Wallpapers of your own.** A folder under `~/.claude/wallpapers/<name>/` holding `day.svg` and/or `night.svg` (and an
+  optional `meta.json`) is a theme: `/custom-theme <name>` applies it, and with both files it follows the system's
+  appearance like the built-in pairs. The folder is read when a session starts and each time `/custom-theme` runs, so a
+  wallpaper drawn a moment ago needs no reload. The skill `make-wallpaper` (`skills/make-wallpaper/`) tells Claude how to
+  draw one: ask Claude for "a wallpaper of ..." in any session. `hooks/custom.ts` turns the folders into themes.
 
 This build keeps the original plugin's name, so it cannot be installed beside Anthropic's own `theme-examples`.
 

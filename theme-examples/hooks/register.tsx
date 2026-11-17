@@ -12,7 +12,9 @@ import {
 } from './fireworks'
 import { keyToWrite, keysToClear, keysToRead, projectKeyFor } from './project-key'
 import type { KeptKey, KeyEngine } from './project-key'
-import { THEMES, sceneFault, sceneOf } from './themes'
+import { CUSTOM_FOLDER, CUSTOM_MOST, customThemesOf, stampOf } from './custom'
+import type { CustomFound } from './custom'
+import { BUILT_IN_IDS, THEMES, sceneFault, sceneOf, setCustomThemes } from './themes'
 import type { Theme } from './themes'
 import type { ThemeChoice } from '../types'
 
@@ -27,7 +29,8 @@ const COMMAND = 'custom-theme'
 // 3. "/custom-theme off" (or No theme on the card) also turns the default off everywhere, and
 //    "/custom-theme default" turns it on again;
 // 4. scenes of our own (Pavilion and Stones, Lattice Windows, Ink Mountains) and warm night stocks of Plotter Tide, in themes.ts;
-// 5. fireworks on the word "merged" are off unless asked for with "/fireworks auto on".
+// 5. fireworks on the word "merged" are off unless asked for with "/fireworks auto on";
+// 6. wallpapers of the person's own, read from ~/.claude/wallpapers (custom.ts; skills/make-wallpaper draws them).
 const DEFAULT_PAIR = { light: 'garden-court', dark: 'garden-court-night' } as const
 // Holds 'off' where the person cleared the project's theme: absent, the default shows. One key for every project.
 const DEFAULT_OFF_KEY = 'local:default-off'
@@ -299,7 +302,7 @@ function rowsFor(window: Theme['window']): string[] {
 /** Every theme by the name to type, under the window it is made for. */
 function themeList(): string {
   return [
-    `Theme examples (${THEMES.length}):`,
+    `Themes (${THEMES.length}):`,
     ...WINDOWS.flatMap(window => [`For ${window} windows:`, ...rowsFor(window)]),
     `Apply one with /${COMMAND} <name>, add "session" for this session only, /${COMMAND} off clears it.`,
   ].join('\n')
@@ -1107,6 +1110,88 @@ async function appearanceTick($: EngineInterface): Promise<void> {
   }
 }
 
+/** LOCAL CHANGE. The stamp of each of the person's own scenes as last read, by theme id: a redrawn file reads as changed. */
+let customStamps = new Map<string, string>()
+
+/** A file's text, or nothing where it is not there or cannot be read. */
+async function textOrNothing($: EngineInterface, path: string): Promise<string | undefined> {
+  try {
+    return await $.fs.read(path)
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * LOCAL CHANGE. Reads the person's own wallpapers from ~/.claude/wallpapers and puts them in the table of themes, at a
+ * session's start and each time the command runs (so one drawn a moment ago can be applied without a reload).
+ * Answers the ids whose scene changed since the last read. A folder that cannot be read leaves the table as it was;
+ * what is left out is told to the debug log alone.
+ */
+async function loadCustom($: EngineInterface): Promise<Set<string>> {
+  const changed = new Set<string>()
+
+  try {
+    const home = await $.env.get('HOME')
+
+    if (home === undefined || home === '') {
+      return changed
+    }
+
+    const root = `${home}/${CUSTOM_FOLDER}`
+    const found: CustomFound[] = []
+
+    if (await $.fs.exists(root)) {
+      const folders = (await $.fs.list(root))
+        .filter(entry => entry.kind === 'dir')
+        .map(entry => entry.name)
+        .sort()
+        .slice(0, CUSTOM_MOST)
+
+      for (const name of folders) {
+        const day = await textOrNothing($, `${root}/${name}/day.svg`)
+        const night = await textOrNothing($, `${root}/${name}/night.svg`)
+        const meta = await textOrNothing($, `${root}/${name}/meta.json`)
+
+        found.push({
+          name,
+          ...(day !== undefined && { day }),
+          ...(night !== undefined && { night }),
+          ...(meta !== undefined && { meta }),
+        })
+      }
+    }
+
+    const { themes, skipped } = customThemesOf(found, BUILT_IN_IDS)
+    const stamps = new Map<string, string>()
+
+    for (const theme of themes) {
+      const stamp = stampOf(theme.scene())
+
+      stamps.set(theme.id, stamp)
+
+      if (customStamps.has(theme.id) && customStamps.get(theme.id) !== stamp) {
+        changed.add(theme.id)
+      }
+    }
+
+    customStamps = stamps
+    setCustomThemes(themes)
+
+    for (const line of skipped) {
+      try {
+        await $.ui.log(`a wallpaper was left out (${line})`, { to: 'debug' })
+      } catch {
+        // An engine without that call: nothing more to tell.
+      }
+    }
+  } catch {
+    // The folder could not be read: the table stays as it was.
+  }
+
+  return changed
+}
+
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     // A refused name must not cost the session its backdrop: go on without the command.
@@ -1135,6 +1220,9 @@ export const register: Register = on => {
     if ((await read($, choice)).preview !== undefined) {
       await update($, choice, was => ({ ...was, preview: undefined }))
     }
+
+    // LOCAL CHANGE: the person's own wallpapers join the table before any choice is followed: a choice may name one.
+    await loadCustom($)
 
     // A session's own choice outlives a reload and a new process; any other follows the project's.
     // Two steps, each quiet by itself: a choice that cannot be followed must not cost the window what the state holds.
@@ -1181,6 +1269,19 @@ export const register: Register = on => {
     const forProject = !(isScoped && last === 'session')
     const name = (isScoped ? words.slice(0, -1) : words).join(' ')
     const key = keyOf(name)
+
+    // LOCAL CHANGE: a wallpaper drawn or redrawn a moment ago is read now. Where the one on show was redrawn, it is taken
+    // down and set again, so that the window asks for its scene anew.
+    const redrawn = await loadCustom($)
+    const onShow = await read($, choice)
+    const shownId = onShow.preview ?? onShow.applied
+
+    if (shownId !== undefined && redrawn.has(shownId)) {
+      await quietly($, async () => {
+        await clearBackdrop($)
+        await show($, shownId)
+      })
+    }
 
     if (name === '') {
       // A surface that draws no placed rows yet gets the card above the prompt.
