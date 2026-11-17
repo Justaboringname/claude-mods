@@ -2418,7 +2418,8 @@ interface Wall {
   scale: number
 }
 
-const WALL: Wall = { from: -6, to: 410, eave: 668, ground: 846, scale: 0.8 }
+// `from` reaches well past the sheet's left edge: the whole left group is set down smaller and further right (LEFT_AT).
+const WALL: Wall = { from: -70, to: 410, eave: 668, ground: 846, scale: 0.8 }
 
 /** The gate: a full circle whose foot is cut by the sill. `drop` is how far its centre stands above the ground. */
 const GATE = { x: 250, drop: 46, r: 62, trim: 10 }
@@ -3159,6 +3160,11 @@ function toSheet(x: number, y: number): Point {
 /** The banana clump, Moon Gate's, drawn in its own units and set down at the peak's left foot, smaller. */
 const BANANA_AT = { k: 0.66, x: 330, y: 876, from: { x: 334, y: 833 } }
 
+/** The left group (wall, gate, peak, banana, bamboo) is drawn in the numbers it was designed in and set down a little smaller
+ * and further right: on a wide window the app's sidebar covers the sheet to about x 197, and the gate's ring, which began at
+ * 178, lost its left side there. Now the ring runs from about 210 to 338 and the peak still ends before the reading column. */
+const LEFT_AT = { k: 0.889, x: 52, y: 98 }
+
 /** The whole sheet on one stock. */
 function gardenSheet(stock: Stock): string {
   const sky = stock.sky
@@ -3272,6 +3278,7 @@ function gardenSheet(stock: Stock): string {
 
   const g = stock.gate
   const left =
+    `<g transform="translate(${LEFT_AT.x} ${LEFT_AT.y}) scale(${LEFT_AT.k})">` +
     beyondGate(stock) +
     bamboo(stock) +
     wall.markup +
@@ -3279,6 +3286,7 @@ function gardenSheet(stock: Stock): string {
     plantedBed(stock) +
     peak.markup +
     `<g transform="translate(${round(BANANA_AT.x - BANANA_AT.from.x * BANANA_AT.k)} ${round(BANANA_AT.y - BANANA_AT.from.y * BANANA_AT.k)}) scale(${BANANA_AT.k})">${plant.markup}</g>` +
+    '</g>' +
     seal(212, 904, stock)
 
   // Built in drawing order, so that every lens of mist has made its gradient before the defs are written.
