@@ -3138,13 +3138,14 @@ function bananaPlant(stock: Stock): Built {
     `<path d="${mondo(318, 833, 12, 61)}${mondo(327, 833, 9, 62)}${mondo(349, 833, 11, 63)}${mondo(375, 833, 8, 64)}${mondo(399, 833, 10, 65)}${mondo(240, 833, 8, 66)}${mondo(289, 833, 9, 67)}" stroke="${stock.walls.tuft}" stroke-width="0.85" stroke-opacity="${line(0.7)}"/>`
   return { defs, markup }
 }
-/** A small seal in the outline of a crabapple (海棠) window, the four-lobed opening of a Suzhou garden wall: vermilion, with four
- * petals left bare. A mark, not a character. */
+/** A small plain seal: a vermilion square with a four-lobed crabapple flower left bare, the same mark as Lattice Windows. A mark,
+ * not a character. */
 function seal(x: number, y: number, stock: Stock): string {
   const bare = skyAt(stock.sky, x + 12, y + 12)
   return (
-    `<g transform="translate(${x} ${y})" opacity="0.92"><path d="M18.1 5.9A6.2 6.2 0 0 1 18.1 18.1A6.2 6.2 0 0 1 5.9 18.1A6.2 6.2 0 0 1 5.9 5.9A6.2 6.2 0 0 1 18.1 5.9Z" fill="${stock.seal}"/>` +
-    `<path d="M12 10.7Q9.2 7.3 12 3.3Q14.8 7.3 12 10.7ZM13.3 12Q16.7 9.2 20.7 12Q16.7 14.8 13.3 12ZM12 13.3Q14.8 16.7 12 20.7Q9.2 16.7 12 13.3ZM10.7 12Q7.3 14.8 3.3 12Q7.3 9.2 10.7 12Z" fill="${bare}"/></g>`
+    `<g transform="translate(${x} ${y})" opacity="0.92"><rect width="24" height="24" rx="2.2" fill="${stock.seal}"/>` +
+    `<path d="M15.2 8.8a3.2 3.2 0 0 1 0 6.4a3.2 3.2 0 0 1 -6.4 0a3.2 3.2 0 0 1 0 -6.4a3.2 3.2 0 0 1 6.4 0Z" stroke="${bare}" stroke-width="1.6"/>` +
+    `<circle cx="12" cy="12" r="1.3" fill="${bare}"/></g>`
   )
 }
 
