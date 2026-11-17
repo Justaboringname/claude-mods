@@ -227,6 +227,28 @@ function themeOf(id: string | undefined): Theme | undefined {
   return THEMES.find(theme => theme.id === id)
 }
 
+// LOCAL CHANGE. A scene is set under its theme's id and a mark of its own picture ("garden-court-night-r0k3f9a2"). A window keeps
+// the picture it was last handed under a name: where a new version of this plugin redrew a scene and set it again under the
+// same name, the sessions that were not in front kept the old picture. A redrawn scene now has a new name, so every window
+// asks for it anew; an unchanged one keeps its name and is not asked for again.
+const REVISED = /-r[0-9a-z]{7}$/
+
+/** The name a theme's scene is set under: its id and seven characters made of its picture. The plain id where the scene does not build. */
+function sceneNameFor(theme: Theme): string {
+  try {
+    const hash = Number(stampOf(sceneOf(theme)).split(':')[1] ?? 0) >>> 0
+
+    return `${theme.id}-r${hash.toString(36).padStart(7, '0').slice(-7)}`
+  } catch {
+    return theme.id
+  }
+}
+
+/** The theme a scene's name stands for: the name is a theme's id, or an id with the mark of its picture behind it. */
+function themeOfScene(name: string): Theme | undefined {
+  return themeOf(name) ?? (REVISED.test(name) ? themeOf(name.slice(0, -9)) : undefined)
+}
+
 /** A name as typed, a title as shown and an id all come to one key: lower case, each run of anything else a hyphen. */
 function keyOf(text: string): string {
   return text
@@ -322,7 +344,7 @@ async function show($: EngineInterface, id: string | undefined): Promise<Backdro
     return undefined
   }
 
-  return setBackdrop($, { id: theme.id, glass: theme.glass, colorScheme: theme.window })
+  return setBackdrop($, { id: sceneNameFor(theme), glass: theme.glass, colorScheme: theme.window })
 }
 
 const PROJECT_PREFIX = 'project:'
@@ -1399,7 +1421,7 @@ export const register: Register = on => {
       )
     }
 
-    const theme = themeOf(name)
+    const theme = themeOfScene(name)
 
     if (theme === undefined) {
       return next(e)
