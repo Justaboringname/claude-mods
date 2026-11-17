@@ -1,0 +1,24 @@
+.DS_Store
+
+# Not ours to publish: code cut from the Claude desktop app's own web bundle,
+# kept locally only to check scenes against (see _workshop/README.md).
+_workshop/scene-tools/app-validator.js
+_workshop/scene-tools-v2/app-validator.js
+_workshop/scene-tools-v2/app-chunk-*.js
+_workshop/veil-test/app-css-*.css
+
+# Trial copies of the plugin and the engine's generated types
+_workshop/theme-examples-trial/
+**/.claude-plugin/types/
+
+# Build leftovers and renders
+_workshop/**/out/
+_workshop/**/_review/
+_workshop/**/*.cjs
+_workshop/**/*.bak
+_workshop/**/day.svg
+_workshop/**/night.svg
+.render-lock
+
+# Preview sheets that show a mock of the app window
+_workshop/scenes-final/*.jpg

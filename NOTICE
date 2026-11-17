@@ -1,0 +1,10 @@
+claude-mods
+
+The folder theme-examples/ is a modified copy of the "theme-examples" plugin, version 0.4.3,
+by Anthropic, licensed under the Apache License, Version 2.0.
+
+Changes made to it are marked "LOCAL CHANGE" in theme-examples/hooks/register.tsx,
+theme-examples/hooks/themes.ts and theme-examples/hooks/scenes/, and are summarised at the top
+of theme-examples/README.md. The scenes garden-lattice*.ts and ink-mountains.ts, the tool
+tools/appearance-watch and everything under _workshop/ are additions by Justaboringname, 2026,
+offered under the same licence.

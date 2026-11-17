@@ -1,0 +1,6 @@
+{
+  "name": "wallpaper",
+  "version": "0.1.0",
+  "description": "Draws a dusk-sky wallpaper behind the conversation in the Claude desktop app.",
+  "author": { "name": "Justaboringname" }
+}
