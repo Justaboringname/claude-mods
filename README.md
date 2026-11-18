@@ -14,6 +14,13 @@ water) that follows the system's light or dark appearance.
 | --- | --- |
 | ![Lattice Windows by day](docs/lattice-day.jpg) | ![Lattice Windows at night](docs/lattice-night.jpg) |
 
+还有一张「水墨远山」，`/custom-theme ink-mountains` 换上。Ink Mountains, ink-wash ridges under a dusk sky, is a theme too:
+`/custom-theme ink-mountains`.
+
+| 水墨远山 · 暮色 | 水墨远山 · 夜 |
+| --- | --- |
+| ![Ink Mountains at dusk](docs/ink-day.jpg) | ![Ink Mountains at night](docs/ink-night.jpg) |
+
 ## 安装 / Install
 
 ```
